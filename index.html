@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matt Rattley</title>
+    <meta
+      name="description"
+      content="Independent higher education consultancy focused on curriculum, assessment, AI in education, and student experience."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div class="app-shell" data-app-shell>
+      <header class="topbar" data-topbar>
+        <button
+          class="menu-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          data-menu-button
+        >
+          ☰ Menu
+        </button>
+        <span class="topbar-title">Matt Rattley</span>
+      </header>
+
+      <aside class="sidebar" data-sidebar>
+        <div class="sidebar-inner">
+          <div class="brand-block">
+            <p class="brand-name">Matt Rattley</p>
+            <p class="brand-subtitle">Higher Education Consultant</p>
+          </div>
+
+          <nav id="mobile-nav" class="site-nav" aria-label="Primary">
+            <a href="/" data-link>Home</a>
+            <a href="/about" data-link>About</a>
+            <a href="/services" data-link>Services</a>
+            <a href="/speaking" data-link>Speaking</a>
+          </nav>
+
+          <nav class="site-nav site-nav-secondary" aria-label="External links">
+            <a href="https://www.linkedin.com/in/mattrattley" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="mailto:matt@mattrattley.com">Email</a>
+          </nav>
+        </div>
+      </aside>
+
+      <main id="main-content" class="content-pane" tabindex="-1" data-content></main>
+    </div>
+  </body>
+</html>
