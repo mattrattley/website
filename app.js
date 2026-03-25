@@ -214,16 +214,20 @@ function renderServices() {
 
           <div class="services-core" aria-label="Core principles">
             <button type="button" class="diagram-zone core-zone core-tl" data-zone="core-evidence">
-              Evidence-informed
+              <span class="core-label-emoji" aria-hidden="true">🔎</span>
+              <span>Rigorous</span>
             </button>
             <button type="button" class="diagram-zone core-zone core-tr" data-zone="core-innovative">
-              Innovative
+              <span class="core-label-emoji" aria-hidden="true">💡</span>
+              <span>Innovative</span>
             </button>
             <button type="button" class="diagram-zone core-zone core-bl" data-zone="core-inclusive">
-              Inclusive
+              <span>Inclusive</span>
+              <span class="core-label-emoji core-label-emoji-bottom" aria-hidden="true">🤝</span>
             </button>
             <button type="button" class="diagram-zone core-zone core-br" data-zone="core-practical">
-              Practical
+              <span>Practical</span>
+              <span class="core-label-emoji core-label-emoji-bottom" aria-hidden="true">🛠️</span>
             </button>
           </div>
         </div>
