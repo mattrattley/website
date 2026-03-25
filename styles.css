@@ -151,6 +151,7 @@ a {
 
 .page p {
   max-width: 100%;
+  font-size: 1.08rem;
 }
 
 .home-hero {
@@ -275,65 +276,105 @@ a {
   position: absolute;
   inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
+  rotate: 0deg;
   width: 300px;
   height: 300px;
+  border: 2px solid color-mix(in srgb, var(--accent) 45%, white);
+  border-radius: 50%;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--accent) 10%, white);
   z-index: 2;
 }
 
+.services-core::before,
+.services-core::after {
+  content: "";
+  position: absolute;
+  background: color-mix(in srgb, var(--accent) 45%, white);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.services-core::before {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+}
+
+.services-core::after {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
 .core-zone {
-  width: 58%;
-  height: 58%;
+  width: 50%;
+  height: 50%;
   display: flex;
-  padding: 0.75rem 0.95rem;
-  font-size: clamp(1rem, 1.1vw, 1.28rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.24rem;
+  padding: 0.52rem;
+  font-size: clamp(1.1rem, 1.2vw, 1.35rem);
   line-height: 1.2;
   font-weight: 650;
-  border: 2px solid color-mix(in srgb, var(--accent) 35%, white);
-  box-shadow: 0 6px 14px rgba(114, 47, 55, 0.12);
+  text-align: center;
+  overflow-wrap: anywhere;
+  border: 0;
+  box-shadow: none;
+  z-index: 2;
+  transform: none;
+}
+
+.core-label-emoji {
+  display: block;
+  font-size: 2.5em;
+  line-height: 1;
+}
+
+.core-label-emoji-bottom {
+  margin-top: 0;
 }
 
 .core-tl {
-  top: 4%;
-  left: 4%;
+  top: 0;
+  left: 0;
   align-items: flex-end;
   justify-content: flex-end;
   text-align: right;
-  border-radius: 64% 42% 56% 46% / 56% 50% 52% 44%;
-  transform: rotate(-16deg);
-  background: color-mix(in srgb, var(--accent) 22%, white);
+  background: color-mix(in srgb, var(--accent) 24%, white);
 }
 
 .core-tr {
-  top: 4%;
-  right: 4%;
-  align-items: flex-end;
-  justify-content: flex-start;
+  top: 0;
+  right: 0;
+  align-items: flex-start;
+  justify-content: flex-end;
   text-align: left;
-  border-radius: 46% 66% 42% 58% / 50% 56% 44% 52%;
-  transform: rotate(14deg);
-  background: color-mix(in srgb, var(--accent) 17%, white);
+  background: color-mix(in srgb, var(--accent) 19%, white);
 }
 
 .core-bl {
-  bottom: 4%;
-  left: 4%;
-  align-items: flex-start;
-  justify-content: flex-end;
+  bottom: 0;
+  left: 0;
+  align-items: flex-end;
+  justify-content: flex-start;
   text-align: right;
-  border-radius: 54% 44% 66% 40% / 46% 44% 58% 62%;
-  transform: rotate(-12deg);
-  background: color-mix(in srgb, var(--accent) 13%, white);
+  background: color-mix(in srgb, var(--accent) 15%, white);
 }
 
 .core-br {
-  bottom: 4%;
-  right: 4%;
+  bottom: 0;
+  right: 0;
   align-items: flex-start;
   justify-content: flex-start;
   text-align: left;
-  border-radius: 42% 60% 46% 64% / 44% 58% 52% 56%;
-  transform: rotate(11deg);
-  background: color-mix(in srgb, var(--accent) 9%, white);
+  background: color-mix(in srgb, var(--accent) 11%, white);
 }
 
 .diagram-zone.is-dimmed {
