@@ -14,6 +14,7 @@ const routes = {
   "/": renderHome,
   "/about": renderAbout,
   "/services": renderServices,
+  "/case-studies": renderCaseStudies,
   "/speaking": renderSpeaking,
 };
 
@@ -163,7 +164,7 @@ function renderHome() {
 function renderAbout() {
   content.innerHTML = `
     <section class="page" aria-labelledby="about-title">
-      <h1 id="about-title">About</h1>
+      <h1 id="about-title">About Me</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed justo vel libero
         pellentesque ultricies. Donec euismod, justo sed tristique elementum, ipsum mi malesuada
@@ -207,6 +208,41 @@ function renderServices() {
       </div>
     </section>
   `;
+}
+
+
+function renderCaseStudies() {
+  content.innerHTML = `
+    <section class="page" aria-labelledby="case-studies-title">
+      <h1 id="case-studies-title">Case Studies</h1>
+      <p>
+        Click each project title to reveal context, actions, and links to supporting materials.
+      </p>
+
+      <div class="accordion" data-accordion>
+        ${renderAccordionItem(
+          "case-1",
+          "Example case: Programme-level assessment redesign",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus.",
+          "https://example.com/case-study-1"
+        )}
+        ${renderAccordionItem(
+          "case-2",
+          "Example case: Curriculum alignment across core modules",
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+          "https://example.com/case-study-2"
+        )}
+        ${renderAccordionItem(
+          "case-3",
+          "Example case: Practical AI integration for teaching teams",
+          "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.",
+          "https://example.com/case-study-3"
+        )}
+      </div>
+    </section>
+  `;
+
+  setupAccordion();
 }
 
 function renderSpeaking() {

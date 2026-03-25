@@ -11,6 +11,7 @@ This is a lightweight single-page website scaffold with client-side routing.
   - `/`
   - `/about`
   - `/services`
+  - `/case-studies`
   - `/speaking`
 
 ## Preview options
