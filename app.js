@@ -189,25 +189,176 @@ function renderServices() {
     <section class="page" aria-labelledby="services-title">
       <h1 id="services-title">Services</h1>
       <p>
-        This page is scaffolded for expanded service content later. Replace the placeholders below
-        with final service descriptions and delivery formats.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. This placeholder introduction can
+        be replaced with your final summary of service approach.
       </p>
-      <div class="service-grid">
-        <article class="service-card">
-          <h2>Curriculum Design</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </article>
-        <article class="service-card">
-          <h2>Assessment Design</h2>
-          <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </article>
-        <article class="service-card">
-          <h2>AI in Education</h2>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-        </article>
+
+      <div class="services-diagram" data-services-diagram aria-label="Interactive services model">
+        <div class="services-oval">
+          <button type="button" class="diagram-zone outer-zone outer-left" data-zone="outer-design">
+            Teaching &amp; Learning Design
+          </button>
+          <button type="button" class="diagram-zone outer-zone outer-right" data-zone="outer-ai">
+            Digital &amp; AI-enhanced Learning
+          </button>
+        </div>
+
+        <div class="services-core" aria-label="Core principles">
+          <button type="button" class="diagram-zone core-zone core-tl" data-zone="core-evidence">
+            evidence-informed
+          </button>
+          <button type="button" class="diagram-zone core-zone core-tr" data-zone="core-innovative">
+            innovative
+          </button>
+          <button type="button" class="diagram-zone core-zone core-bl" data-zone="core-inclusive">
+            inclusive
+          </button>
+          <button type="button" class="diagram-zone core-zone core-br" data-zone="core-practical">
+            practical
+          </button>
+        </div>
+
+        <aside class="diagram-info-panel" data-diagram-panel hidden aria-live="polite"></aside>
       </div>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. This placeholder sentence can be
+        replaced with practical examples and outcomes from your engagements.
+      </p>
     </section>
   `;
+
+  setupServicesDiagram();
+}
+
+function setupServicesDiagram() {
+  const diagram = document.querySelector("[data-services-diagram]");
+  const panel = diagram?.querySelector("[data-diagram-panel]");
+  const zones = diagram ? Array.from(diagram.querySelectorAll("[data-zone]")) : [];
+  if (!diagram || !panel || zones.length === 0) return;
+
+  const zoneContent = {
+    "core-evidence": {
+      title: "Evidence-informed",
+      text: "Placeholder text for how decisions are grounded in credible educational evidence.",
+      bullets: [],
+      panelClass: "panel-pos-br",
+    },
+    "core-innovative": {
+      title: "Innovative",
+      text: "Placeholder text for practical innovation that improves teaching and learning design.",
+      bullets: [],
+      panelClass: "panel-pos-bl",
+    },
+    "core-inclusive": {
+      title: "Inclusive",
+      text: "Placeholder text for designing learning that works for diverse student needs.",
+      bullets: [],
+      panelClass: "panel-pos-tr",
+    },
+    "core-practical": {
+      title: "Practical",
+      text: "Placeholder text for implementable solutions that staff teams can apply quickly.",
+      bullets: [],
+      panelClass: "panel-pos-tl",
+    },
+    "outer-design": {
+      title: "Teaching & Learning Design",
+      text: "Placeholder sentence introducing the teaching and learning design strand.",
+      bullets: [
+        "Programme and module design",
+        "Assessment and feedback alignment",
+        "Practical implementation support",
+      ],
+      panelClass: "panel-pos-center",
+    },
+    "outer-ai": {
+      title: "Digital & AI-enhanced Learning",
+      text: "Placeholder sentence introducing digital and AI-enhanced learning support.",
+      bullets: [
+        "AI-informed curriculum adaptation",
+        "Staff capability development",
+        "Sustainable digital workflows",
+      ],
+      panelClass: "panel-pos-center",
+    },
+  };
+
+  let activeZone = null;
+
+  function renderPanel(zoneId) {
+    const details = zoneContent[zoneId];
+    if (!details) return;
+
+    panel.className = `diagram-info-panel ${details.panelClass}`;
+    panel.hidden = false;
+
+    const bulletList = details.bullets.length
+      ? `<ul>${details.bullets.map((item) => `<li>${item}</li>`).join("")}</ul>`
+      : "";
+
+    panel.innerHTML = `
+      <h2>${details.title}</h2>
+      <p>${details.text}</p>
+      ${bulletList}
+    `;
+  }
+
+  function applyDimming(zoneId) {
+    zones.forEach((zone) => {
+      const isActive = zone.dataset.zone === zoneId;
+      zone.classList.toggle("is-active", isActive);
+      zone.classList.toggle("is-dimmed", !isActive);
+    });
+  }
+
+  function clearSelection() {
+    activeZone = null;
+    panel.hidden = true;
+    panel.innerHTML = "";
+    panel.className = "diagram-info-panel";
+    zones.forEach((zone) => zone.classList.remove("is-active", "is-dimmed"));
+  }
+
+  function setSelection(zoneId) {
+    if (!zoneContent[zoneId]) return;
+    activeZone = zoneId;
+    applyDimming(zoneId);
+    renderPanel(zoneId);
+  }
+
+  zones.forEach((zone) => {
+    const zoneId = zone.dataset.zone;
+
+    zone.addEventListener("mouseenter", () => setSelection(zoneId));
+    zone.addEventListener("focus", () => setSelection(zoneId));
+    zone.addEventListener("click", () => {
+      if (activeZone === zoneId) {
+        clearSelection();
+      } else {
+        setSelection(zoneId);
+      }
+    });
+    zone.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        clearSelection();
+      }
+    });
+  });
+
+  diagram.addEventListener("mouseleave", () => {
+    if (!diagram.contains(document.activeElement)) {
+      clearSelection();
+    }
+  });
+
+  diagram.addEventListener("focusout", () => {
+    setTimeout(() => {
+      if (!diagram.contains(document.activeElement)) {
+        clearSelection();
+      }
+    }, 0);
+  });
 }
 
 
