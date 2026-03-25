@@ -214,16 +214,16 @@ function renderServices() {
 
           <div class="services-core" aria-label="Core principles">
             <button type="button" class="diagram-zone core-zone core-tl" data-zone="core-evidence">
-              Evidence-informed
+              🔎 Evidence-informed
             </button>
             <button type="button" class="diagram-zone core-zone core-tr" data-zone="core-innovative">
-              Innovative
+              💡 Innovative
             </button>
             <button type="button" class="diagram-zone core-zone core-bl" data-zone="core-inclusive">
-              Inclusive
+              🤝 Inclusive
             </button>
             <button type="button" class="diagram-zone core-zone core-br" data-zone="core-practical">
-              Practical
+              🛠️ Practical
             </button>
           </div>
         </div>
