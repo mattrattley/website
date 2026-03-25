@@ -215,7 +215,7 @@ function renderServices() {
           <div class="services-core" aria-label="Core principles">
             <button type="button" class="diagram-zone core-zone core-tl" data-zone="core-evidence">
               <span class="core-label-emoji" aria-hidden="true">🔎</span>
-              <span>Evidence-informed</span>
+              <span>Rigorous</span>
             </button>
             <button type="button" class="diagram-zone core-zone core-tr" data-zone="core-innovative">
               <span class="core-label-emoji" aria-hidden="true">💡</span>
