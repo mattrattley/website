@@ -217,8 +217,8 @@ a {
 
 .services-diagram {
   position: relative;
-  margin: 1.6rem 0;
-  min-height: 540px;
+  margin: 0.85rem 0 0.9rem;
+  min-height: 430px;
   background: transparent;
   overflow: hidden;
 }
@@ -285,39 +285,45 @@ a {
   width: 50%;
   height: 50%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0.8rem;
-  font-size: 0.92rem;
+  padding: 0.65rem 0.8rem;
+  font-size: 0.9rem;
+  line-height: 1.2;
   font-weight: 600;
 }
 
 .core-tl {
   top: 0;
   left: 0;
-  transform: translate(22%, 22%);
+  align-items: flex-end;
+  justify-content: flex-end;
+  text-align: right;
   background: color-mix(in srgb, var(--accent) 22%, white);
 }
 
 .core-tr {
   top: 0;
   right: 0;
-  transform: translate(-22%, 22%);
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: left;
   background: color-mix(in srgb, var(--accent) 17%, white);
 }
 
 .core-bl {
   bottom: 0;
   left: 0;
-  transform: translate(22%, -22%);
+  align-items: flex-start;
+  justify-content: flex-end;
+  text-align: right;
   background: color-mix(in srgb, var(--accent) 13%, white);
 }
 
 .core-br {
   bottom: 0;
   right: 0;
-  transform: translate(-22%, -22%);
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
   background: color-mix(in srgb, var(--accent) 9%, white);
 }
 
@@ -506,7 +512,7 @@ a {
   }
 
   .services-diagram {
-    min-height: 700px;
+    min-height: 620px;
   }
 
   .services-oval {
