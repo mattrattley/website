@@ -162,7 +162,7 @@ function renderHome() {
 
 function renderAbout() {
   content.innerHTML = `
-    <section class="page page-about" aria-labelledby="about-title">
+    <section class="page" aria-labelledby="about-title">
       <h1 id="about-title">About</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed justo vel libero

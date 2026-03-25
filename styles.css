@@ -150,10 +150,6 @@ a {
 }
 
 .page p {
-  max-width: 78ch;
-}
-
-.page-about p {
   max-width: 100%;
 }
 
