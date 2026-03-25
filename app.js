@@ -194,28 +194,28 @@ function renderServices() {
       </p>
 
       <div class="services-diagram" data-services-diagram aria-label="Interactive services model">
-        <div class="services-oval">
+        <div class="services-oval" data-services-boundary>
           <button type="button" class="diagram-zone outer-zone outer-left" data-zone="outer-design">
             Teaching &amp; Learning Design
           </button>
           <button type="button" class="diagram-zone outer-zone outer-right" data-zone="outer-ai">
             Digital &amp; AI-enhanced Learning
           </button>
-        </div>
 
-        <div class="services-core" aria-label="Core principles">
-          <button type="button" class="diagram-zone core-zone core-tl" data-zone="core-evidence">
-            evidence-informed
-          </button>
-          <button type="button" class="diagram-zone core-zone core-tr" data-zone="core-innovative">
-            innovative
-          </button>
-          <button type="button" class="diagram-zone core-zone core-bl" data-zone="core-inclusive">
-            inclusive
-          </button>
-          <button type="button" class="diagram-zone core-zone core-br" data-zone="core-practical">
-            practical
-          </button>
+          <div class="services-core" aria-label="Core principles">
+            <button type="button" class="diagram-zone core-zone core-tl" data-zone="core-evidence">
+              Evidence-informed
+            </button>
+            <button type="button" class="diagram-zone core-zone core-tr" data-zone="core-innovative">
+              Innovative
+            </button>
+            <button type="button" class="diagram-zone core-zone core-bl" data-zone="core-inclusive">
+              Inclusive
+            </button>
+            <button type="button" class="diagram-zone core-zone core-br" data-zone="core-practical">
+              Practical
+            </button>
+          </div>
         </div>
 
         <aside class="diagram-info-panel" data-diagram-panel hidden aria-live="polite"></aside>
@@ -233,9 +233,10 @@ function renderServices() {
 
 function setupServicesDiagram() {
   const diagram = document.querySelector("[data-services-diagram]");
+  const boundary = diagram?.querySelector("[data-services-boundary]");
   const panel = diagram?.querySelector("[data-diagram-panel]");
   const zones = diagram ? Array.from(diagram.querySelectorAll("[data-zone]")) : [];
-  if (!diagram || !panel || zones.length === 0) return;
+  if (!diagram || !boundary || !panel || zones.length === 0) return;
 
   const zoneContent = {
     "core-evidence": {
@@ -346,8 +347,8 @@ function setupServicesDiagram() {
     });
   });
 
-  diagram.addEventListener("mouseleave", () => {
-    if (!diagram.contains(document.activeElement)) {
+  boundary.addEventListener("mouseleave", () => {
+    if (!boundary.contains(document.activeElement)) {
       clearSelection();
     }
   });
