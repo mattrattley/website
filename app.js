@@ -185,14 +185,15 @@ function renderAbout() {
 }
 
 function renderServices() {
-  const buildServicesDiagram = (variant, heading) => `
-    <section class="services-variant-block" aria-label="${heading}">
-      <h2>${heading}</h2>
-      <div
-        class="services-diagram services-diagram--${variant}"
-        data-services-diagram
-        aria-label="Interactive services model (${heading})"
-      >
+  content.innerHTML = `
+    <section class="page" aria-labelledby="services-title">
+      <h1 id="services-title">Services</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. This placeholder introduction can
+        be replaced with your final summary of service approach.
+      </p>
+
+      <div class="services-diagram" data-services-diagram aria-label="Interactive services model">
         <div class="services-oval" data-services-boundary>
           <button
             type="button"
@@ -211,7 +212,7 @@ function renderServices() {
             Digital &amp;<br />AI-enhanced Learning
           </button>
 
-          <div class="services-core core-${variant}" aria-label="Core principles">
+          <div class="services-core" aria-label="Core principles">
             <button type="button" class="diagram-zone core-zone core-tl" data-zone="core-evidence">
               Evidence-informed
             </button>
@@ -229,20 +230,6 @@ function renderServices() {
 
         <aside class="diagram-info-panel" data-diagram-panel hidden aria-live="polite"></aside>
       </div>
-    </section>
-  `;
-
-  content.innerHTML = `
-    <section class="page" aria-labelledby="services-title">
-      <h1 id="services-title">Services</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. This placeholder introduction can
-        be replaced with your final summary of service approach.
-      </p>
-
-      ${buildServicesDiagram("quadrant", "Option A: Clean quadrant core")}
-      ${buildServicesDiagram("rounded", "Option B: Rounded blended wedges")}
-      ${buildServicesDiagram("swirl", "Option C: Swirl-style petals")}
 
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. This placeholder sentence can be
@@ -255,6 +242,12 @@ function renderServices() {
 }
 
 function setupServicesDiagram() {
+  const diagram = document.querySelector("[data-services-diagram]");
+  const boundary = diagram?.querySelector("[data-services-boundary]");
+  const panel = diagram?.querySelector("[data-diagram-panel]");
+  const zones = diagram ? Array.from(diagram.querySelectorAll("[data-zone]")) : [];
+  if (!diagram || !boundary || !panel || zones.length === 0) return;
+
   const zoneContent = {
     "core-evidence": {
       title: "Evidence-informed",
@@ -301,89 +294,81 @@ function setupServicesDiagram() {
       panelClass: "panel-pos-center",
     },
   };
-  const diagrams = Array.from(document.querySelectorAll("[data-services-diagram]"));
 
-  diagrams.forEach((diagram) => {
-    const boundary = diagram.querySelector("[data-services-boundary]");
-    const panel = diagram.querySelector("[data-diagram-panel]");
-    const zones = Array.from(diagram.querySelectorAll("[data-zone]"));
-    if (!boundary || !panel || zones.length === 0) return;
+  let activeZone = null;
 
-    let activeZone = null;
+  function renderPanel(zoneId) {
+    const details = zoneContent[zoneId];
+    if (!details) return;
 
-    function renderPanel(zoneId) {
-      const details = zoneContent[zoneId];
-      if (!details) return;
+    panel.className = `diagram-info-panel ${details.panelClass}`;
+    panel.hidden = false;
 
-      panel.className = `diagram-info-panel ${details.panelClass}`;
-      panel.hidden = false;
+    const bulletList = details.bullets.length
+      ? `<ul>${details.bullets.map((item) => `<li>${item}</li>`).join("")}</ul>`
+      : "";
 
-      const bulletList = details.bullets.length
-        ? `<ul>${details.bullets.map((item) => `<li>${item}</li>`).join("")}</ul>`
-        : "";
+    panel.innerHTML = `
+      <h2>${details.title}</h2>
+      <p>${details.text}</p>
+      ${bulletList}
+    `;
+  }
 
-      panel.innerHTML = `
-        <h2>${details.title}</h2>
-        <p>${details.text}</p>
-        ${bulletList}
-      `;
-    }
-
-    function applyDimming(zoneId) {
-      zones.forEach((zone) => {
-        const isActive = zone.dataset.zone === zoneId;
-        zone.classList.toggle("is-active", isActive);
-        zone.classList.toggle("is-dimmed", !isActive);
-      });
-    }
-
-    function clearSelection() {
-      activeZone = null;
-      panel.hidden = true;
-      panel.innerHTML = "";
-      panel.className = "diagram-info-panel";
-      zones.forEach((zone) => zone.classList.remove("is-active", "is-dimmed"));
-    }
-
-    function setSelection(zoneId) {
-      if (!zoneContent[zoneId]) return;
-      activeZone = zoneId;
-      applyDimming(zoneId);
-      renderPanel(zoneId);
-    }
-
+  function applyDimming(zoneId) {
     zones.forEach((zone) => {
-      const zoneId = zone.dataset.zone;
-
-      zone.addEventListener("mouseenter", () => setSelection(zoneId));
-      zone.addEventListener("focus", () => setSelection(zoneId));
-      zone.addEventListener("click", () => {
-        if (activeZone === zoneId) {
-          clearSelection();
-        } else {
-          setSelection(zoneId);
-        }
-      });
-      zone.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          clearSelection();
-        }
-      });
+      const isActive = zone.dataset.zone === zoneId;
+      zone.classList.toggle("is-active", isActive);
+      zone.classList.toggle("is-dimmed", !isActive);
     });
+  }
 
-    boundary.addEventListener("mouseleave", () => {
-      if (!boundary.contains(document.activeElement)) {
+  function clearSelection() {
+    activeZone = null;
+    panel.hidden = true;
+    panel.innerHTML = "";
+    panel.className = "diagram-info-panel";
+    zones.forEach((zone) => zone.classList.remove("is-active", "is-dimmed"));
+  }
+
+  function setSelection(zoneId) {
+    if (!zoneContent[zoneId]) return;
+    activeZone = zoneId;
+    applyDimming(zoneId);
+    renderPanel(zoneId);
+  }
+
+  zones.forEach((zone) => {
+    const zoneId = zone.dataset.zone;
+
+    zone.addEventListener("mouseenter", () => setSelection(zoneId));
+    zone.addEventListener("focus", () => setSelection(zoneId));
+    zone.addEventListener("click", () => {
+      if (activeZone === zoneId) {
+        clearSelection();
+      } else {
+        setSelection(zoneId);
+      }
+    });
+    zone.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
         clearSelection();
       }
     });
+  });
 
-    diagram.addEventListener("focusout", () => {
-      setTimeout(() => {
-        if (!diagram.contains(document.activeElement)) {
-          clearSelection();
-        }
-      }, 0);
-    });
+  boundary.addEventListener("mouseleave", () => {
+    if (!boundary.contains(document.activeElement)) {
+      clearSelection();
+    }
+  });
+
+  diagram.addEventListener("focusout", () => {
+    setTimeout(() => {
+      if (!diagram.contains(document.activeElement)) {
+        clearSelection();
+      }
+    }, 0);
   });
 }
 
