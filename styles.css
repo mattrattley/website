@@ -129,13 +129,17 @@ a {
 .content-pane {
   grid-column: 2;
   padding: 2.2rem clamp(1rem, 3vw, 3rem);
-  max-width: 1180px;
+  max-width: 1320px;
   width: 100%;
   margin-inline: auto;
 }
 
+.content-pane:focus {
+  outline: none;
+}
+
 .page {
-  max-width: 980px;
+  max-width: 1100px;
   margin-inline: auto;
 }
 
@@ -146,7 +150,7 @@ a {
 }
 
 .page p {
-  max-width: 70ch;
+  max-width: 78ch;
 }
 
 .home-hero {
@@ -191,7 +195,7 @@ a {
 
 .about-inline-photo {
   margin: 1.5rem 0;
-  width: min(100%, 560px);
+  width: min(100%, 700px);
   border-radius: 0.75rem;
   box-shadow: var(--shadow);
 }
