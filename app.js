@@ -35,7 +35,7 @@ const BASE_PATH = USE_HASH_ROUTING ? "" : normalizeBasePath(SITE_CONFIG.basePath
 function toHrefPath(routePath) {
   const route = normalizePath(routePath);
   if (!BASE_PATH) return route;
-  return route === "/" ? BASE_PATH : `${BASE_PATH}${route}`;
+  return route === "/" ? `${BASE_PATH}/` : `${BASE_PATH}${route}`;
 }
 
 function stripBasePath(pathname) {
