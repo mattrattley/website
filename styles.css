@@ -218,7 +218,7 @@ a {
 
 .services-diagram {
   position: relative;
-  margin: 0.85rem 0 0.9rem;
+  margin: 0.35rem 0 0.45rem;
   min-height: 430px;
   background: transparent;
   overflow: hidden;
@@ -419,23 +419,23 @@ a {
 }
 
 .panel-pos-tl {
-  left: 8%;
-  top: 12%;
+  left: 24%;
+  top: 24%;
 }
 
 .panel-pos-tr {
-  right: 8%;
-  top: 12%;
+  right: 24%;
+  top: 24%;
 }
 
 .panel-pos-bl {
-  left: 8%;
-  bottom: 12%;
+  left: 24%;
+  bottom: 24%;
 }
 
 .panel-pos-br {
-  right: 8%;
-  bottom: 12%;
+  right: 24%;
+  bottom: 24%;
 }
 
 .panel-pos-center {
