@@ -131,10 +131,12 @@ a {
   padding: 2.2rem clamp(1rem, 3vw, 3rem);
   max-width: 1180px;
   width: 100%;
+  margin-inline: auto;
 }
 
 .page {
   max-width: 980px;
+  margin-inline: auto;
 }
 
 .page h1 {
@@ -175,8 +177,6 @@ a {
   transform: translateY(-50%);
   max-width: min(65%, 46rem);
   padding: 1.2rem;
-  background: color-mix(in srgb, white 78%, transparent);
-  border-left: 4px solid var(--accent);
 }
 
 .home-hero-text h1 {

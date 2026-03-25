@@ -1,4 +1,5 @@
 const SITE_CONFIG = {
+  basePath: "/websitetest",
   homeImage: "./assets/home-placeholder.svg",
   aboutImage: "./assets/about-placeholder.svg",
 };
@@ -7,6 +8,7 @@ const content = document.querySelector("[data-content]");
 const navLinks = Array.from(document.querySelectorAll("[data-link]"));
 const sidebar = document.querySelector("[data-sidebar]");
 const menuButton = document.querySelector("[data-menu-button]");
+const USE_HASH_ROUTING = window.location.protocol === "file:";
 
 const routes = {
   "/": renderHome,
@@ -15,15 +17,67 @@ const routes = {
   "/speaking": renderSpeaking,
 };
 
+function normalizePath(rawPath) {
+  if (!rawPath) return "/";
+  let path = rawPath.trim();
+  if (!path.startsWith("/")) path = `/${path}`;
+  path = path.replace(/\/+$/, "");
+  return path === "" ? "/" : path;
+}
+
+function normalizeBasePath(rawBasePath) {
+  const normalized = normalizePath(rawBasePath || "/");
+  return normalized === "/" ? "" : normalized;
+}
+
+const BASE_PATH = USE_HASH_ROUTING ? "" : normalizeBasePath(SITE_CONFIG.basePath);
+
+function toHrefPath(routePath) {
+  const route = normalizePath(routePath);
+  if (!BASE_PATH) return route;
+  return route === "/" ? BASE_PATH : `${BASE_PATH}${route}`;
+}
+
+function stripBasePath(pathname) {
+  const current = normalizePath(pathname);
+  if (!BASE_PATH) return current;
+  if (current === BASE_PATH) return "/";
+  if (current.startsWith(`${BASE_PATH}/`)) {
+    return normalizePath(current.slice(BASE_PATH.length));
+  }
+  return current;
+}
+
+function getCurrentPath() {
+  if (USE_HASH_ROUTING) {
+    const hashPath = window.location.hash.replace(/^#/, "");
+    return normalizePath(hashPath || "/");
+  }
+  return stripBasePath(window.location.pathname || "/");
+}
+
 function navigate(path) {
-  if (window.location.pathname !== path) {
-    history.pushState({}, "", path);
+  const targetPath = normalizePath(path);
+
+  if (USE_HASH_ROUTING) {
+    const nextHash = `#${targetPath}`;
+    if (window.location.hash !== nextHash) {
+      window.location.hash = nextHash;
+      return;
+    }
+    renderCurrentRoute();
+    return;
+  }
+
+  const destination = toHrefPath(targetPath);
+  if (window.location.pathname !== destination) {
+    history.pushState({}, "", destination);
   }
   renderCurrentRoute();
 }
 
 function renderCurrentRoute() {
-  const path = window.location.pathname;
+  const path = getCurrentPath();
   const renderer = routes[path] || renderNotFound;
   renderer();
   highlightCurrentNav(path);
@@ -33,8 +87,21 @@ function renderCurrentRoute() {
 
 function highlightCurrentNav(path) {
   navLinks.forEach((link) => {
-    const isActive = link.getAttribute("href") === path;
-    link.classList.toggle("active", isActive);
+    const route = normalizePath(link.getAttribute("data-route") || link.getAttribute("href"));
+    link.classList.toggle("active", route === path);
+  });
+}
+
+function setNavHrefsForCurrentMode() {
+  navLinks.forEach((link) => {
+    const route = normalizePath(link.getAttribute("href"));
+    link.setAttribute("data-route", route);
+
+    if (USE_HASH_ROUTING) {
+      link.setAttribute("href", `#${route}`);
+    } else {
+      link.setAttribute("href", toHrefPath(route));
+    }
   });
 }
 
@@ -42,11 +109,16 @@ function attachNavListeners() {
   navLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
-      navigate(link.getAttribute("href"));
+      const route = link.getAttribute("data-route") || "/";
+      navigate(route);
     });
   });
 
-  window.addEventListener("popstate", renderCurrentRoute);
+  if (USE_HASH_ROUTING) {
+    window.addEventListener("hashchange", renderCurrentRoute);
+  } else {
+    window.addEventListener("popstate", renderCurrentRoute);
+  }
 }
 
 function attachMenuListener() {
@@ -81,9 +153,6 @@ function renderHome() {
         />
         <div class="home-hero-text">
           <h1 id="home-title">Clear, practical support for teaching and learning in higher education.</h1>
-          <p>
-            Placeholder text for your final hero messaging. Replace with your final copy when ready.
-          </p>
         </div>
       </div>
     </section>
@@ -235,7 +304,7 @@ function renderNotFound() {
     <section class="page" aria-labelledby="not-found-title">
       <h1 id="not-found-title">Page not found</h1>
       <p>The page you tried to visit doesn’t exist in this draft site.</p>
-      <p><a class="speaking-link" href="/" data-link-inline>Return to home</a></p>
+      <p><a class="speaking-link" href="#" data-link-inline>Return to home</a></p>
     </section>
   `;
 
@@ -246,6 +315,7 @@ function renderNotFound() {
   });
 }
 
+setNavHrefsForCurrentMode();
 attachNavListeners();
 attachMenuListener();
 renderCurrentRoute();
