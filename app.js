@@ -81,6 +81,7 @@ function renderCurrentRoute() {
   const renderer = routes[path] || renderNotFound;
   renderer();
   highlightCurrentNav(path);
+  content.classList.toggle("content-pane-home", path === "/");
   closeSidebar();
   content.focus();
 }
@@ -152,7 +153,7 @@ function renderHome() {
           class="home-hero-image"
         />
         <div class="home-hero-text">
-          <h1 id="home-title">Clear, practical support for teaching and learning in higher education.</h1>
+          <h1 id="home-title">I’m Matt 👋 I work with universities and organisations to improve how learning is designed and delivered</h1>
         </div>
       </div>
     </section>

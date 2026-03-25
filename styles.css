@@ -151,7 +151,7 @@ a {
 
 .home-hero {
   position: relative;
-  min-height: 78vh;
+  min-height: calc(100dvh - 2.2rem);
   overflow: hidden;
   border-radius: 0.9rem;
   box-shadow: var(--shadow);
@@ -173,20 +173,20 @@ a {
 .home-hero-text {
   position: absolute;
   left: clamp(1rem, 4vw, 3rem);
+  right: clamp(1rem, 4vw, 3rem);
   top: 42%;
   transform: translateY(-50%);
-  max-width: min(65%, 46rem);
   padding: 1.2rem;
 }
 
 .home-hero-text h1 {
   margin: 0;
   font-size: clamp(2rem, 4vw, 4rem);
+  max-width: none;
 }
 
-.home-hero-text p {
-  margin: 0.8rem 0 0;
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
+.content-pane.content-pane-home {
+  padding-bottom: 0;
 }
 
 .about-inline-photo {
@@ -315,7 +315,7 @@ a {
   }
 
   .home-hero {
-    min-height: 72vh;
+    min-height: calc(100dvh - 4.6rem);
   }
 
   .home-hero-image {
@@ -325,6 +325,5 @@ a {
 
   .home-hero-text {
     top: 34%;
-    max-width: 92%;
   }
 }
