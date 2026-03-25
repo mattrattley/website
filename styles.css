@@ -252,7 +252,8 @@ a {
 .outer-zone {
   top: 50%;
   transform: translateY(-50%);
-  width: 36%;
+  width: calc(50% - 180px);
+  min-width: 160px;
   max-width: 320px;
   text-align: center;
   font-size: clamp(1.08rem, 1.15vw, 1.35rem);
@@ -523,13 +524,14 @@ a {
   }
 
   .outer-zone {
-    width: 44%;
+    width: calc(50% - 130px);
+    min-width: 112px;
     font-size: clamp(0.98rem, 3vw, 1.15rem);
   }
 
   .services-core {
-    width: 240px;
-    height: 240px;
+    width: 220px;
+    height: 220px;
   }
 
   .diagram-info-panel {
@@ -550,5 +552,23 @@ a {
     left: 50%;
     right: auto;
     transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .services-diagram {
+    min-height: 560px;
+  }
+
+  .outer-zone {
+    width: calc(50% - 110px);
+    min-width: 96px;
+    font-size: clamp(0.86rem, 2.6vw, 1rem);
+    line-height: 1.15;
+  }
+
+  .services-core {
+    width: 190px;
+    height: 190px;
   }
 }

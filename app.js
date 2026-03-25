@@ -195,11 +195,21 @@ function renderServices() {
 
       <div class="services-diagram" data-services-diagram aria-label="Interactive services model">
         <div class="services-oval" data-services-boundary>
-          <button type="button" class="diagram-zone outer-zone outer-left" data-zone="outer-design">
-            Teaching &amp; Learning Design
+          <button
+            type="button"
+            class="diagram-zone outer-zone outer-left"
+            data-zone="outer-design"
+            aria-label="Teaching and Learning Design"
+          >
+            Teaching &amp; Learning<br />Design
           </button>
-          <button type="button" class="diagram-zone outer-zone outer-right" data-zone="outer-ai">
-            Digital &amp; AI-enhanced Learning
+          <button
+            type="button"
+            class="diagram-zone outer-zone outer-right"
+            data-zone="outer-ai"
+            aria-label="Digital and AI-enhanced Learning"
+          >
+            Digital &amp;<br />AI-enhanced Learning
           </button>
 
           <div class="services-core" aria-label="Core principles">
