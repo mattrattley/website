@@ -13,9 +13,7 @@ This is a lightweight single-page website scaffold with client-side routing.
   - `/services`
   - `/speaking`
 
-## Preview options
-
-### Option A (recommended): run a local static server
+## Run locally
 
 You can serve the folder with any static server. Example:
 
@@ -24,10 +22,6 @@ python3 -m http.server 8080
 ```
 
 Then open `http://localhost:8080`.
-
-### Option B: open `index.html` directly (file mode)
-
-If you open `index.html` directly from your file system, the app automatically switches to hash routing (e.g. `#/services`) so links still work without pointing to `C:/services.html`.
 
 ## Swap images later
 
@@ -44,7 +38,7 @@ const SITE_CONFIG = {
 
 No other code changes are required.
 
-## Note about direct URL routing on web servers
+## Note about direct URL routing
 
-When served over `http(s)`, this scaffold uses clean paths with `history.pushState`.
+This scaffold uses `history.pushState` for clean URLs.
 If your production web server does not already rewrite unknown paths to `index.html`, configure that rewrite so `/about`, `/services`, etc. load correctly on hard refresh.
