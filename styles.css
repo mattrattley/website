@@ -153,6 +153,10 @@ a {
   max-width: 78ch;
 }
 
+.page-about p {
+  max-width: 100%;
+}
+
 .home-hero {
   position: relative;
   min-height: calc(100dvh - 2.2rem);
