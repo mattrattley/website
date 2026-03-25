@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder inline image</title>
+  <desc id="desc">Minimal placeholder graphic for about page inline image.</desc>
+  <rect width="1000" height="600" fill="#ece7e8"/>
+  <rect x="60" y="60" width="880" height="480" rx="30" fill="#d8c7ca"/>
+  <text x="50%" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" fill="#5d2c34">Inline placeholder image</text>
+</svg>
